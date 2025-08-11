@@ -2,8 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaStar, FaHeart } from 'react-icons/fa';
 
-const ProductCard = ({ product }) => {
-  const formatPrice = (price) => {
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  image: string;
+  rating: number;
+  reviews: number;
+  badge?: string;
+}
+
+interface ProductCardProps {
+  product: Product;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const formatPrice = (price: number): string => {
     return new Intl.NumberFormat('vi-VN', {
       style: 'currency',
       currency: 'VND'
@@ -108,4 +123,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default ProductCard; 
+export default ProductCard;

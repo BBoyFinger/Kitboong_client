@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaUser, FaBars, FaTimes, FaSearch } from 'react-icons/fa';
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+const Navbar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const toggleSearch = () => setIsSearchOpen(!isSearchOpen);
+  const toggleMenu = (): void => setIsMenuOpen(!isMenuOpen);
+  const toggleSearch = (): void => setIsSearchOpen(!isSearchOpen);
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
@@ -140,4 +140,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;

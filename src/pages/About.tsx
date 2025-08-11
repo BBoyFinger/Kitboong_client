@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaUsers, FaAward, FaGlobe, FaHeart, FaShieldAlt, FaLightbulb } from 'react-icons/fa';
 
-const About = () => {
+const About: React.FC = () => {
   const stats = [
     { number: '10+', label: 'Năm kinh nghiệm', icon: FaAward },
     { number: '50K+', label: 'Khách hàng hài lòng', icon: FaUsers },
@@ -53,10 +53,10 @@ const About = () => {
             <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 font-display mb-6">
               Về Kit Boong
             </h1>
-                            <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Chúng tôi là thương hiệu tiên phong trong lĩnh vực sản xuất và phân phối 
-                  các sản phẩm chất lượng cao, mang đến trải nghiệm tuyệt vời cho khách hàng tại Hà Giang và toàn quốc.
-                </p>
+            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+              Chúng tôi là thương hiệu tiên phong trong lĩnh vực sản xuất và phân phối 
+              các sản phẩm chất lượng cao, mang đến trải nghiệm tuyệt vời cho khách hàng tại Hà Giang và toàn quốc.
+            </p>
             <div className="inline-flex items-center px-6 py-3 bg-primary-100 text-primary-700 rounded-full text-lg font-medium">
               <FaAward className="w-6 h-6 mr-2" />
               Thương hiệu uy tín 10+ năm
@@ -133,7 +133,7 @@ const About = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {values.map((value, index) => (
               <div key={index} className="text-center group">
-                <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-primary-50 to.secondary-50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <value.icon className="w-10 h-10 text-primary-500" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3 font-display">
@@ -158,7 +158,7 @@ const About = () => {
                   <p className="text-gray-600">Hà Giang, Việt Nam</p>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-2">Năm thành lập:</h4>
+                  <h4 className="font-semibold text.gray-900 mb-2">Năm thành lập:</h4>
                   <p className="text-gray-600">2013</p>
                 </div>
                 <div>
@@ -220,19 +220,19 @@ const About = () => {
           <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
             Khám phá bộ sưu tập sản phẩm đa dạng và chất lượng cao của chúng tôi
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                         <Link
-               to="/products"
-               className="btn-secondary text-lg px-8 py-4"
-             >
-               Xem sản phẩm
-             </Link>
-             <Link
-               to="/contact"
-               className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary-600"
-             >
-               Liên hệ ngay
-             </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify.center">
+            <Link
+              to="/products"
+              className="btn-secondary text-lg px-8 py-4"
+            >
+              Xem sản phẩm
+            </Link>
+            <Link
+              to="/contact"
+              className="btn-outline text-lg px-8 py-4 border-white text-white hover:bg-white hover:text-primary-600"
+            >
+              Liên hệ ngay
+            </Link>
           </div>
         </div>
       </section>
@@ -240,4 +240,4 @@ const About = () => {
   );
 };
 
-export default About; 
+export default About;

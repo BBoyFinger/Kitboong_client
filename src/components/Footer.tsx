@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -21,20 +21,20 @@ const Footer = () => {
             <p className="text-gray-300 leading-relaxed">
               Thương hiệu uy tín hàng đầu trong lĩnh vực cung cấp các sản phẩm chất lượng cao với giá cả hợp lý.
             </p>
-                         <div className="flex space-x-4">
-               <button className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors duration-300">
-                 <FaFacebook className="w-5 h-5" />
-               </button>
-               <button className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors duration-300">
-                 <FaInstagram className="w-5 h-5" />
-               </button>
-               <button className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors duration-300">
-                 <FaTwitter className="w-5 h-5" />
-               </button>
-               <button className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors duration-300">
-                 <FaYoutube className="w-5 h-5" />
-               </button>
-             </div>
+            <div className="flex space-x-4">
+              <button className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors duration-300">
+                <FaFacebook className="w-5 h-5" />
+              </button>
+              <button className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors duration-300">
+                <FaInstagram className="w-5 h-5" />
+              </button>
+              <button className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors duration-300">
+                <FaTwitter className="w-5 h-5" />
+              </button>
+              <button className="w-10 h-10 bg-gray-800 hover:bg-primary-500 rounded-full flex items-center justify-center transition-colors duration-300">
+                <FaYoutube className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -172,4 +172,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;
