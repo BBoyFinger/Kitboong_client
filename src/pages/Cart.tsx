@@ -80,45 +80,45 @@ const Cart: React.FC = () => {
       </div>
 
       <div className="container-custom py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Sản phẩm trong giỏ hàng</h2>
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Sản phẩm trong giỏ hàng</h2>
 
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {cartItems.map((item) => (
-                  <div key={item.id} className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg">
-                    <div className="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                  <div key={item.id} className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-4 p-3 sm:p-4 border border-gray-200 rounded-lg">
+                    <div className="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 mx-auto sm:mx-0">
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     </div>
 
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 text-center sm:text-left">
                       <h3 className="text-lg font-semibold text-gray-900 truncate">{item.name}</h3>
-                      <div className="flex items-center space-x-3 mt-2">
+                      <div className="flex flex-col sm:flex-row items-center sm:items-baseline justify-center sm:justify-start space-y-1 sm:space-y-0 sm:space-x-3 mt-2">
                         <span className="text-lg font-bold text-primary-600">{formatPrice(item.price)}</span>
                         {item.originalPrice && <span className="text-gray-400 line-through">{formatPrice(item.originalPrice)}</span>}
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center justify-center space-x-2 mt-2 sm:mt-0">
                       <button onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1} className="w-8 h-8 border border-gray-300 rounded-lg flex items-center justify-center text-gray-600 hover:text-primary-600 hover:border-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">-</button>
                       <span className="w-12 text-center font-medium">{item.quantity}</span>
                       <button onClick={() => updateQuantity(item.id, item.quantity + 1)} disabled={item.quantity >= item.stock} className="w-8 h-8 border border-gray-300 rounded-lg flex items-center justify-center text-gray-600 hover:text-primary-600 hover:border-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">+</button>
                     </div>
 
-                    <div className="text-right min-w-0">
+                    <div className="text-right min-w-0 mt-2 sm:mt-0">
                       <div className="text-lg font-bold text-gray-900">{formatPrice(item.price * item.quantity)}</div>
                       {item.originalPrice && <div className="text-sm text-gray-500">Tiết kiệm: {formatPrice((item.originalPrice - item.price) * item.quantity)}</div>}
                     </div>
 
-                    <button onClick={() => removeItem(item.id)} className="p-2 text-gray-400 hover:text-red-600 transition-colors">
+                    <button onClick={() => removeItem(item.id)} className="p-2 text-gray-400 hover:text-red-600 transition-colors mt-2 sm:mt-0">
                       <FaTrash className="w-4 h-4" />
                     </button>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-6 pt-6 border-t border-gray-200">
+              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
                 <Link to="/products" className="inline-flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium transition-colors">
                   <FaArrowLeft className="w-4 h-4" />
                   <span>Tiếp tục mua sắm</span>
@@ -127,9 +127,9 @@ const Cart: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-lg p-6 sticky top-24">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Tóm tắt đơn hàng</h2>
+          <div className="lg:col-span-1 mt-8 lg:mt-0">
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 sticky top-24">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Tóm tắt đơn hàng</h2>
               <div className="space-y-4">
                 <div className="flex justify-between text-gray-600"><span>Tạm tính:</span><span>{formatPrice(calculateSubtotal())}</span></div>
                 {calculateDiscount() > 0 && <div className="flex justify-between text-green-600"><span>Tiết kiệm:</span><span>-{formatPrice(calculateDiscount())}</span></div>}

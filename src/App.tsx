@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './i18n';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -24,6 +25,11 @@ const App: React.FC = () => {
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/about" element={<About />} />
+          {/* Collection routes */}
+          <Route path="/collections/all" element={<Products />} />
+          <Route path="/collections/custom-bongs" element={<Products />} />
+          <Route path="/collections/mason-jar-bongs" element={<Products />} />
+          <Route path="/collections/bowls-bangers" element={<Products />} />
         </Routes>
         <Footer />
       </div>

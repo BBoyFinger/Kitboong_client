@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FaSearch, FaFilter, FaTh, FaList } from 'react-icons/fa';
 import ProductCard from '../components/ProductCard';
 
+const collectionMap: Record<string, string> = {
+  'all': 'Tất cả sản phẩm',
+  'custom-bongs': 'Custom Bongs',
+  'mason-jar-bongs': 'Mason Jar Bongs',
+  'bowls-bangers': 'Bowls and Bangers',
+};
+
 const Products: React.FC = () => {
+  const location = useLocation();
+  const collection = location.pathname.split('/')[2] || 'all';
+
   const [products, setProducts] = useState<any[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -15,12 +26,12 @@ const Products: React.FC = () => {
 
   useEffect(() => {
     const mockProducts = [
-      { id: 1, name: 'Kit Boong Premium', price: 299000, originalPrice: 399000, image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop', rating: 4.8, reviews: 124, badge: 'Bán chạy', category: 'premium', description: 'Kit Boong Premium với chất lượng cao cấp, thiết kế hiện đại' },
-      { id: 2, name: 'Kit Boong Deluxe', price: 199000, originalPrice: 249000, image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop', rating: 4.6, reviews: 89, badge: 'Giảm giá', category: 'deluxe', description: 'Kit Boong Deluxe với giá cả hợp lý, chất lượng tốt' },
-      { id: 3, name: 'Kit Boong Standard', price: 149000, originalPrice: 199000, image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop', rating: 4.5, reviews: 67, badge: 'Mới', category: 'standard', description: 'Kit Boong Standard phù hợp với mọi nhu cầu' },
-      { id: 4, name: 'Kit Boong Pro', price: 399000, originalPrice: 499000, image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop', rating: 4.9, reviews: 156, badge: 'Cao cấp', category: 'pro', description: 'Kit Boong Pro với tính năng đặc biệt, chất lượng vượt trội' },
-      { id: 5, name: 'Kit Boong Mini', price: 99000, originalPrice: 129000, image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop', rating: 4.3, reviews: 45, badge: 'Tiết kiệm', category: 'mini', description: 'Kit Boong Mini gọn nhẹ, tiện lợi' },
-      { id: 6, name: 'Kit Boong Max', price: 599000, originalPrice: 699000, image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop', rating: 5.0, reviews: 89, badge: 'Cao cấp', category: 'max', description: 'Kit Boong Max với công nghệ tiên tiến nhất' }
+      { id: 1, name: 'Kit Boong Premium', price: 299000, originalPrice: 399000, image: '/images/kitboong1/1.webp', rating: 4.8, reviews: 124, badge: 'Bán chạy', category: 'premium', description: 'Kit Boong Premium với chất lượng cao cấp, thiết kế hiện đại', collection: 'all' },
+      { id: 2, name: 'Custom Bong A', price: 199000, originalPrice: 249000, image: '/images/kitboong1/2.webp', rating: 4.6, reviews: 89, badge: 'Giảm giá', category: 'deluxe', description: 'Custom Bong chất lượng', collection: 'custom-bongs' },
+      { id: 3, name: 'Mason Jar Bong B', price: 149000, originalPrice: 199000, image: '/images/kitboong1/3.webp', rating: 4.5, reviews: 67, badge: 'Mới', category: 'standard', description: 'Mason Jar Bong tiện lợi', collection: 'mason-jar-bongs' },
+      { id: 4, name: 'Bowl & Banger C', price: 399000, originalPrice: 499000, image: '/images/kitboong.jpg', rating: 4.9, reviews: 156, badge: 'Cao cấp', category: 'pro', description: 'Bowls and Bangers chất lượng', collection: 'bowls-bangers' },
+      { id: 5, name: 'Kit Boong Mini', price: 99000, originalPrice: 129000, image: '/images/kitboong1/1.webp', rating: 4.3, reviews: 45, badge: 'Tiết kiệm', category: 'mini', description: 'Kit Boong Mini gọn nhẹ, tiện lợi', collection: 'all' },
+      { id: 6, name: 'Kit Boong Max', price: 599000, originalPrice: 699000, image: '/images/kitboong1/2.webp', rating: 5.0, reviews: 89, badge: 'Cao cấp', category: 'max', description: 'Kit Boong Max với công nghệ tiên tiến nhất', collection: 'all' }
     ];
     setProducts(mockProducts);
     setFilteredProducts(mockProducts);
@@ -31,7 +42,8 @@ const Products: React.FC = () => {
       const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) || product.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
       const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
-      return matchesSearch && matchesCategory && matchesPrice;
+      const matchesCollection = collection === 'all' || (product.collection && product.collection === collection);
+      return matchesSearch && matchesCategory && matchesPrice && matchesCollection;
     });
 
     switch (sortBy) {
@@ -53,7 +65,7 @@ const Products: React.FC = () => {
 
     setFilteredProducts(filtered);
     setCurrentPage(1);
-  }, [products, searchTerm, selectedCategory, priceRange, sortBy]);
+  }, [products, searchTerm, selectedCategory, priceRange, sortBy, collection]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -82,7 +94,9 @@ const Products: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="bg.white shadow-sm">
         <div className="container-custom py-8">
-          <h1 className="text-4xl font-bold text-gray-900 font-display mb-4">Sản phẩm Kit Boong</h1>
+          <h1 className="text-4xl font-bold text-gray-900 font-display mb-4">
+            {collectionMap[collection] || 'Sản phẩm Kit Boong'}
+          </h1>
           <p className="text-xl text-gray-600">Khám phá bộ sưu tập đa dạng với chất lượng cao cấp</p>
         </div>
       </div>
